@@ -71,3 +71,7 @@ php artisan key:generate
 php artisan migrate
 npm install && npm run dev
 php artisan serve
+
+## 🌐 Public Demo (Codespaces)
+
+[Truy cập website](https://studious-space-waffle-x5xqqjx76xrqhvqv6-80.app.github.dev/)
