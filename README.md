@@ -169,13 +169,13 @@
 # Clone project
 git clone: https://github.com/h4unguyxn/midterm-project
 cd library-management
-
+```
 # Cài đặt môi trường
 ```bash
 composer install
 cp .env.example .env
 php artisan key:generate
-
+```
 # Cấu hình Aiven Cloud DB trong .env
 # DB_CONNECTION=mysql
 # DB_HOST=xxx
@@ -188,11 +188,11 @@ php artisan key:generate
 ```bash
 php artisan migrate
 npm install && npm run dev
-
+```
 # Chạy app
 ```bash
 php artisan serve
-
+```
 ---
 
 ## 🌐 Public Demo
