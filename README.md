@@ -48,7 +48,17 @@
 
 5. **Bảo mật đã triển khai**
     - CSRF Protection (`@csrf`)
+        <form action="{{ route('books.store') }}" method="POST">
+            @csrf
+            <!-- Các input -->
+        </form>
+   
     - Validation dữ liệu (server-side)
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email,' . $student->id,
+            'student_code' => 'required|string|unique:students,student_code,' . $student->id,
+        ]);
     - Auth middleware (`auth`, `guest`)
     - Escape HTML output → chống XSS
     - Session & Cookie được bảo mật theo Laravel config
