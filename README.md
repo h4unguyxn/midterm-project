@@ -177,13 +177,14 @@ cp .env.example .env
 php artisan key:generate
 ```
 # Cấu hình Aiven Cloud DB trong .env
+```bash
 # DB_CONNECTION=mysql
 # DB_HOST=xxx
 # DB_PORT=3306
 # DB_DATABASE=your_db
 # DB_USERNAME=your_user
 # DB_PASSWORD=your_pass
-
+```
 # Migrate database
 ```bash
 php artisan migrate
