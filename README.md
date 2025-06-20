@@ -2,6 +2,8 @@
 
 Ứng dụng quản lý thư viện được xây dựng bằng Laravel, hỗ trợ quản lý sinh viên, sách và phiếu mượn sách. Hệ thống có tính năng đăng nhập, xác thực, phân quyền, và đảm bảo bảo mật đầu vào.
 
+---
+
 ## 🧑‍🎓 Thông tin sinh viên
 
 - **Họ và tên:** Nguyễn Xuân Hậu  
@@ -32,7 +34,7 @@
     3. BorrowRecord
         - Thuộc tính: `student_id`, `book_id`, `borrow_date`, `return_date`
         - Quan hệ: n-1 với `Book`, n-1 với `Student`
-        - **Chức năng:** Thêm / Sửa / Xoá / Danh sách / Giao diện cảnh báo mượn sắp đến hạn ở dashboard
+        - **Chức năng:** Thêm / Sửa / Xoá / Danh sách / Giao diện cảnh báo phiếu mượn sắp đến hạn ở dashboard
 
 
 3. **CRUD**
@@ -68,20 +70,33 @@
 - Eloquent ORM
 - Tailwind CSS
 - ...
+  
 ---
 
 
 ## 🖼️ Giao diện minh họa
-> Dashboard
+> Trang chủ
 ![Screenshot 2025-06-21 035957](https://github.com/user-attachments/assets/8cf9f076-8a24-4ffb-a95b-517936cac987)
 
-> Quản lý sách
+> Giao diện quản lý sách
 ![Screenshot 2025-06-21 040323](https://github.com/user-attachments/assets/38b4b590-0845-4df2-aa15-872fcf967a21)
 
 > Thêm, chỉnh sửa sách
 ![Screenshot 2025-06-21 040509](https://github.com/user-attachments/assets/34d03ba0-551e-4937-ab90-e2082b906987)![Screenshot 2025-06-21 040525](https://github.com/user-attachments/assets/ebf7cd16-ac65-4479-947f-d3373628c432)
 
+> Giao diện quản lý sinh viên
+![Screenshot 2025-06-21 040758](https://github.com/user-attachments/assets/e21c6e33-283a-4478-9b11-fc5b8bfc7c18)
 
+> Thêm, chỉnh sửa thông tin sinh viên
+![Screenshot 2025-06-21 040815](https://github.com/user-attachments/assets/a73a23ba-d7c7-4825-81a4-9529ceb2b00d)![Screenshot 2025-06-21 040829](https://github.com/user-attachments/assets/20de1234-1496-421d-b926-96aa85bda489)
+
+> Giao diện quản lý phiếu mượn
+![Screenshot 2025-06-21 041144](https://github.com/user-attachments/assets/dce6503f-3095-4fb9-bdbb-123d4835ebba)
+
+> Thêm, chỉnh sửa phiếu mượn
+![Screenshot 2025-06-21 041154](https://github.com/user-attachments/assets/c55b7e4d-dc9f-4002-9ab3-cce17a42db01)![Screenshot 2025-06-21 041203](https://github.com/user-attachments/assets/83b89c01-2ed7-430e-8958-fc7e837bcf3e)
+
+---
 
 ## 🚀 Hướng dẫn cài đặt
 
@@ -110,6 +125,8 @@ npm install && npm run dev
 # Chạy app
 php artisan serve
 
-## 🌐 Public Demo (Codespaces)
+---
+
+## 🌐 Public Demo
 
 [Truy cập website](https://studious-space-waffle-x5xqqjx76xrqhvqv6-80.app.github.dev/)
