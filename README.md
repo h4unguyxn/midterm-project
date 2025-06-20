@@ -48,21 +48,61 @@
 
 5. **Bảo mật đã triển khai**
     - CSRF Protection (`@csrf`)
+        ```blade
         <form action="{{ route('books.store') }}" method="POST">
             @csrf
             <!-- Các input -->
         </form>
-   
+        ```
     - Validation dữ liệu (server-side)
+        ```php
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:students,email,' . $student->id,
-            'student_code' => 'required|string|unique:students,student_code,' . $student->id,
+            'title'    => 'required|string|max:255',
+            'author'   => 'required|string|max:255',
+            'genre'    => 'nullable|string|max:255',     // Có thể không nhập nhưng nếu có thì phải là chuỗi
+            'isbn'     => 'required|string|max:20|unique:books',
+            'quantity' => 'required|integer|min:0',       // Không cho phép số âm
         ]);
+        ```
     - Auth middleware (`auth`, `guest`)
+      ```php
+      Route::middleware(['auth'])->group(function () {
+          Route::resource('students', StudentController::class);
+      });
+      ```
     - Escape HTML output → chống XSS
+      ```blade
+      {{ $book->title }}
+      ```
     - Session & Cookie được bảo mật theo Laravel config
+      ```php
+      'secure' => env('SESSION_SECURE_COOKIE'),
+      'http_only' => env('SESSION_HTTP_ONLY', true),
+      'same_site' => env('SESSION_SAME_SITE', 'lax'),
+      ```
     - Truy vấn an toàn với Eloquent ORM (chống SQL Injection)
+      ```php
+        public function index(Request $request)
+        {
+            $query = Book::query();
+        
+            if ($request->filled('author')) {
+                $query->where('author', 'like', '%' . $request->author . '%');
+            }
+        
+            if ($request->filled('genre')) {
+                $query->where('genre', 'like', '%' . $request->genre . '%');
+            }
+        
+            if ($request->filled('title')) {
+                $query->where('title', 'like', '%' . $request->title . '%');
+            }
+        
+            $books = $query->get();
+            return view('books.index', compact('books'));
+        }
+      ```
+
 
 6.  **Cơ sở dữ liệu**
     - Sử dụng **Aiven Cloud** để lưu trữ cơ sở dữ liệu
@@ -131,6 +171,7 @@ git clone: https://github.com/h4unguyxn/midterm-project
 cd library-management
 
 # Cài đặt môi trường
+```bash
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -144,10 +185,12 @@ php artisan key:generate
 # DB_PASSWORD=your_pass
 
 # Migrate database
+```bash
 php artisan migrate
 npm install && npm run dev
 
 # Chạy app
+```bash
 php artisan serve
 
 ---
