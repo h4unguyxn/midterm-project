@@ -1,124 +1,281 @@
 <x-app-layout>
     <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             min-height: 100vh;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
         
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
         
         .nav-link {
-            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .nav-link svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
             position: relative;
             overflow: hidden;
         }
         
-        .nav-link::before {
+        .welcome-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .action-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .action-card .icon {
+            width: 48px;
+            height: 48px;
+            background: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .action-card.books .icon { background: #dbeafe; color: var(--primary); }
+        .action-card.students .icon { background: #dcfce7; color: #16a34a; }
+        .action-card.borrow .icon { background: #fef3c7; color: #d97706; }
+        
+        .action-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .action-card p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .status-section {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .status-header {
+            background: var(--secondary);
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .status-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status-content {
+            padding: 24px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            border-collapse: collapse;
         }
         
-        .nav-link:hover::before {
-            left: 100%;
+        th {
+            background: var(--secondary);
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
         }
         
-        .nav-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
         }
         
-        .card-hover {
-            transition: all 0.3s ease;
+        tr:hover {
+            background: var(--secondary);
         }
         
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        .due-date {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .no-records {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-light);
         }
         
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
+        .no-records .icon {
+            width: 64px;
+            height: 64px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: #16a34a;
         }
         
-        .welcome-card {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.4), rgba(16, 185, 129, 0.2));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(34, 197, 94, 0.3);
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
         }
         
-        .books-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(37, 99, 235, 0.2));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
         }
         
-        .students-card {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(147, 51, 234, 0.2));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(168, 85, 247, 0.3);
+        .nav-container {
+            display: flex;
+            gap: 12px;
         }
         
-        .borrow-card {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(217, 119, 6, 0.2));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-        
-        .status-card {
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.4), rgba(219, 39, 119, 0.2));
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(236, 72, 153, 0.3);
-        }
-        
-        .card-spacing {
-            margin-bottom: 2rem;
-        }
-        
-        .section-spacing {
-            padding: 2rem 0;
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            
+            .nav-container {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .welcome-section {
+                padding: 24px;
+                text-align: center;
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-black leading-tight">
+        <div class="header-container">
+            <h2 class="header-title">
                 {{ __('Bảng điều khiển') }}
             </h2>
             
-            <!-- Navigation Links -->
-            <div class="flex space-x-4">
-                <a href="/books" class="nav-link bg-white bg-opacity-20 hover:bg-opacity-30 text-black px-4 py-2 rounded-lg font-medium text-sm flex items-center">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="nav-container">
+                <a href="/books" class="nav-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                     Sách
                 </a>
                 
-                <a href="/students" class="nav-link bg-white bg-opacity-20 hover:bg-opacity-30 text-black px-4 py-2 rounded-lg font-medium text-sm flex items-center">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="/students" class="nav-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
                     </svg>
                     Sinh viên
                 </a>
                 
-                <a href="/borrow-records" class="nav-link bg-white bg-opacity-20 hover:bg-opacity-30 text-black px-4 py-2 rounded-lg font-medium text-sm flex items-center">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="/borrow-records" class="nav-link">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
                     </svg>
                     Phiếu mượn
@@ -127,67 +284,94 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Welcome Card -->
-            <div class="welcome-card overflow-hidden shadow-xl sm:rounded-lg mb-12 card-hover card-spacing">
-                <div class="p-8 text-white">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">{{ __("Chào mừng bạn đến với Hệ thống quản lý thư viện!") }}</h3>
-                            <p class="text-lg opacity-90">{{ __("Bạn đã đăng nhập và sẵn sàng quản lý thư viện của mình.") }}</p>
-                        </div>
-                        <div class="float-animation">
-                            <svg class="w-16 h-16 text-yellow-300 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <h3 class="text-2xl font-bold mb-2">{{ __("Chào mừng bạn đến với Hệ thống quản lý thư viện!") }}</h3>
+                <p class="text-lg opacity-90">{{ __("Bạn đã đăng nhập và sẵn sàng quản lý thư viện của mình.") }}</p>
             </div>
 
-            <!-- Quick Actions Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <a href="/books" class="books-card rounded-lg p-8 card-hover block group card-spacing">
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <svg class="w-12 h-12 text-blue-300 group-hover:text-blue-200 transition-colors duration-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-white mb-2">Quản lý sách</h3>
-                        <p class="text-white opacity-75">Thêm, chỉnh sửa, xoá sách</p>
+            <!-- Quick Actions -->
+            <div class="action-grid">
+                <a href="/books" class="action-card books">
+                    <div class="icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
                     </div>
+                    <h3>Quản lý sách</h3>
+                    <p>Thêm, chỉnh sửa và xóa sách trong thư viện</p>
                 </a>
 
-                <a href="/students" class="students-card rounded-lg p-8 card-hover block group card-spacing">
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <svg class="w-12 h-12 text-green-300 group-hover:text-green-200 transition-colors duration-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-white mb-2">Quản lý sinh viên</h3>
-                        <p class="text-white opacity-75">Đăng ký và quản lý thông tin sinh viên</p>
+                <a href="/students" class="action-card students">
+                    <div class="icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+                        </svg>
                     </div>
+                    <h3>Quản lý sinh viên</h3>
+                    <p>Đăng ký và quản lý thông tin sinh viên</p>
                 </a>
 
-                <a href="/borrow-records" class="borrow-card rounded-lg p-8 card-hover block group card-spacing">
-                    <div class="text-center">
-                        <div class="mb-4">
-                            <svg class="w-12 h-12 text-yellow-300 group-hover:text-yellow-200 transition-colors duration-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-white mb-2">Quản lý phiếu mượn</h3>
-                        <p class="text-white opacity-75">Theo dõi việc mượn và trả sách</p>
+                <a href="/borrow-records" class="action-card borrow">
+                    <div class="icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        </svg>
                     </div>
+                    <h3>Quản lý phiếu mượn</h3>
+                    <p>Theo dõi việc mượn và trả sách của sinh viên</p>
                 </a>
             </div>
 
-            <!-- Original Content (Enhanced) -->
-            
+            <!-- Status Section -->
+            <div class="status-section">
+                @if($borrowRecordsDueSoon->count() > 0)
+                    <div class="status-header">
+                        <h3>
+                            <span style="color: #f59e0b;">⚠️</span>
+                            Phiếu mượn sắp đến hạn ({{ $borrowRecordsDueSoon->count() }})
+                        </h3>
+                    </div>
+                    <div class="status-content">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sinh viên</th>
+                                        <th>Tên sách</th>
+                                        <th>Ngày mượn</th>
+                                        <th>Ngày trả</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($borrowRecordsDueSoon as $record)
+                                        <tr>
+                                            <td>{{ $record->student->name }}</td>
+                                            <td>{{ $record->book->title }}</td>
+                                            <td>{{ $record->borrow_date }}</td>
+                                            <td>
+                                                <span class="due-date">{{ $record->return_date }}</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @else
+                    <div class="no-records">
+                        <div class="icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 32px; height: 32px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">Không có phiếu mượn nào sắp đến hạn</h3>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 </x-app-layout>
