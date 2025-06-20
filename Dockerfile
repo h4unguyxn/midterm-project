@@ -17,10 +17,6 @@ COPY . .
 # Cài đặt Laravel dependencies (chế độ production)
 RUN composer install --optimize-autoloader --no-dev
 
-# Tạo APP_KEY nếu chưa có (nếu bạn đã cấu hình APP_KEY bên ngoài thì không cần)
-RUN php artisan config:clear && \
-    php artisan cache:clear && \
-    php artisan route:clear
 
 # CHÚ Ý: tạo storage/link & cấp quyền
 RUN php artisan storage:link && \
