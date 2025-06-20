@@ -73,6 +73,21 @@
   
 ---
 
+## 🧩 Sơ đồ hệ thống
+
+### 1. Entity Relationship Diagram (ERD)
+![Screenshot 2025-06-21 042149](https://github.com/user-attachments/assets/7cde95d0-6e68-4871-99f0-17206f526f53)
+
+### 2. Use Case Diagram
+![use case](https://github.com/user-attachments/assets/9b856e32-1c63-4049-b789-15661f223f97)
+
+### 3. Class Diagram
+![class diagram](https://github.com/user-attachments/assets/08c8c110-3b54-4da5-9038-9642353f7209)
+
+### 4. Sequence Diagram
+![sequence](https://github.com/user-attachments/assets/565d13ec-52e0-4507-b299-fb8356b4d504)
+
+---
 
 ## 🖼️ Giao diện minh họa
 > Trang chủ
